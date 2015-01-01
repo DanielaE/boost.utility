@@ -151,6 +151,14 @@ protected:
 template < typename MemberType, int UniqueID >
 class base_from_member<MemberType&, UniqueID>
 {
+#if defined(BOOST_NO_CXX11_DELETED_FUNCTIONS)
+base_from_member( const base_from_member& );
+base_from_member& operator=( const base_from_member& );
+#else
+base_from_member( const base_from_member& ) = delete;
+base_from_member& operator=( const base_from_member& ) = delete;
+#endif
+
 protected:
     MemberType& member;
 
