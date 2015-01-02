@@ -36,6 +36,10 @@ class BOOST_PP_CAT(typed_in_place_factory,N)
   : 
   public typed_in_place_factory_base
 {
+#if N > 0
+  BOOST_PP_CAT(typed_in_place_factory,N) & operator= (const BOOST_PP_CAT(typed_in_place_factory,N) &);
+#endif
+
 public:
 
   typedef T value_type;

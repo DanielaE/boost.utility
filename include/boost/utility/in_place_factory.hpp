@@ -38,6 +38,10 @@ class BOOST_PP_CAT(in_place_factory,N)
   : 
   public in_place_factory_base
 {
+#if N > 0
+  BOOST_PP_CAT(in_place_factory,N) & operator= (const BOOST_PP_CAT(in_place_factory,N) &);
+#endif
+
 public:
 
   explicit BOOST_PP_CAT(in_place_factory,N)
