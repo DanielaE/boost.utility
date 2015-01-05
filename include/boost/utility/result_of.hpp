@@ -88,7 +88,9 @@ template<typename F> struct cpp0x_result_of;
 // the user-defined operator,() below doesn't cause spurious warning all over the place,
 // so unconditionally turn it off.
 #if BOOST_MSVC
+#  pragma warning(push)
 #  pragma warning(disable: 4913) // user defined binary operator ',' exists but no overload could convert all operands, default built-in binary operator ',' used
+#  pragma warning(disable: 4512) // assignment operator could not be generated
 #endif
 
 struct result_of_private_type {};
@@ -137,6 +139,10 @@ struct result_of_wrap_callable_class<C &> {
 };
 
 template<typename F, bool TestCallability = true> struct cpp0x_result_of_impl;
+
+#if BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #else // BOOST_NO_SFINAE_EXPR
 
