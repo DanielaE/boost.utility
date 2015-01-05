@@ -88,7 +88,9 @@ template<typename F> struct cpp0x_result_of;
 // the user-defined operator,() below doesn't cause spurious warning all over the place,
 // so unconditionally turn it off.
 #if BOOST_MSVC
+#  pragma warning(push)
 #  pragma warning(disable: 4913) // user defined binary operator ',' exists but no overload could convert all operands, default built-in binary operator ',' used
+#  pragma warning(disable: 4512) // assignment operator could not be generated
 #endif
 
 struct result_of_private_type {};
@@ -200,6 +202,10 @@ struct tr1_result_of_impl<F, FArgs, false>
 
 #define BOOST_PP_ITERATION_PARAMS_1 (3,(0,BOOST_RESULT_OF_NUM_ARGS,<boost/utility/detail/result_of_iterate.hpp>))
 #include BOOST_PP_ITERATE()
+
+#if BOOST_MSVC
+#  pragma warning(pop)
+#endif
 
 #else
 #  define BOOST_NO_RESULT_OF 1
