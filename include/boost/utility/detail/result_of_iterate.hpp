@@ -69,6 +69,11 @@ struct cpp0x_result_of<F(BOOST_PP_ENUM_PARAMS(BOOST_PP_ITERATION(),T))>
       >::type
 {};
 
+#ifdef BOOST_MSVC
+# pragma warning(push)
+# pragma warning(disable: 4239) // nonstandard extension used
+#endif
+
 #ifdef BOOST_NO_SFINAE_EXPR
 
 template<typename F>
@@ -149,6 +154,10 @@ struct cpp0x_result_of_impl<F(BOOST_PP_ENUM_PARAMS(BOOST_PP_ITERATION(),T)),
 };
 
 #endif // BOOST_NO_SFINAE_EXPR
+
+#ifdef BOOST_MSVC
+# pragma warning(pop)
+#endif
 
 } // namespace detail
 
