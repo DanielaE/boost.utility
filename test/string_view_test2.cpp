@@ -130,7 +130,7 @@ void find ( const char *arg ) {
 //  for all possible chars, see if we find them in the right place.
 //  Note that strchr will/might do the _wrong_ thing if we search for NULL
     for ( int ch = 1; ch < 256; ++ch ) {
-        string_view::size_type pos = sr1.find(ch);
+        string_view::size_type pos = sr1.find(static_cast<char>(ch));
         const char *strp = std::strchr ( arg, ch );
         BOOST_TEST (( strp == NULL ) == ( pos == string_view::npos ));
         if ( strp != NULL )
@@ -142,7 +142,7 @@ void find ( const char *arg ) {
 //  for all possible chars, see if we find them in the right place.
 //  Note that strchr will/might do the _wrong_ thing if we search for NULL
     for ( int ch = 1; ch < 256; ++ch ) {
-        string_view::size_type pos = sr1.rfind(ch);
+        string_view::size_type pos = sr1.rfind(static_cast<char>(ch));
         const char *strp = std::strrchr ( arg, ch );
         BOOST_TEST (( strp == NULL ) == ( pos == string_view::npos ));
         if ( strp != NULL )
